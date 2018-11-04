@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
+    'minerals',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 ROOT_URLCONF = 'mineralcatalog_search.urls'
 
@@ -63,7 +67,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries': {
+                'utility_tags': 'mineralcatalog_search.templatetags.utlity_tags',
+            }
         },
+
     },
 ]
 
@@ -76,7 +84,7 @@ WSGI_APPLICATION = 'mineralcatalog_search.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'mineral.db'),
     }
 }
 
@@ -118,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'),
+)
