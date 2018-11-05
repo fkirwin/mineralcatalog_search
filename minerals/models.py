@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 import json
 import os
+import sys
 
 from django.db import models
 from django.db import transaction
@@ -38,14 +39,19 @@ class Mineral(models.Model):
     @classmethod
     def ingest_data_from_json_file(cls):
         payload = []
+        current_minerals = [mineral.name for mineral in Mineral.objects.all()]
         with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+ MINERAL_DATA_SOURCE, encoding="utf8") as source:
             json_string = source.read()
             for each in json.loads(json_string):
                 each = {k.replace(' ', '_'): v for k, v in each.items()}
-                payload.append(Mineral(**each))
-                try:
-                    with transaction.atomic():
-                        Mineral.objects.bulk_create(payload)
-                except Exception as e:  #Don't care.  Just put the records in there without failing.
-                    print(e)
+                mineral = Mineral(**each)
+                if mineral.name not in current_minerals:
+                    payload.append(mineral)
+                    current_minerals.append(mineral.name)
+        try:
+            Mineral.objects.bulk_create(payload)
+        except:  #Don't care.  Just put the records in there without failing.
+            import traceback
+            _type, _value, _traceback = sys.exc_info()
+            print(_type, _value)
         return True

@@ -15,7 +15,7 @@ from minerals.models import Mineral
 
 try:
     Mineral.ingest_data_from_json_file()
-except (utils.DatabaseError, utils.DataError) as e:
+except (utils.DatabaseError, utils.DataError, Exception) as e:
     print(e)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mineralcatalog_search.settings')

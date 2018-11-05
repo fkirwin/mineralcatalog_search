@@ -25,6 +25,7 @@ def mineral_detail(request, pk):
         #Default value in case of emergency!
         print(err)
         random_mineral = get_object_or_404(Mineral.objects.first())
-    return render(request, 'detail.html',
+    return render(request,
+                  'detail.html',
                   {'mineral': selected_mineral,
                    'random_mineral': random_mineral})

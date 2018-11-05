@@ -19,8 +19,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+from minerals import views as mineral_views
+
 urlpatterns = [
     url(r'^minerals/', include(('minerals.urls', 'minerals'),  namespace='minerals')),
     url('admin/', admin.site.urls),
-    url(r'^$', include(('minerals.urls', 'minerals'))),
+    url(r'^$', mineral_views.index, name='index')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
