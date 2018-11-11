@@ -1,4 +1,6 @@
 {%load static from staticfiles %}
+{% load utility_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,7 +14,32 @@
       <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
     </head>
     <body>
-        <div class="grid-100">
+    <div class="grid-100">
+        <div class="grid-10" style="float: left; margin-left: 2%; margin-right: -8%">
+            <h2>Categorically</h2>
+            {% menu_dict as menu %}
+            {% for key, values in menu.items %}
+                <button class="accordion">{{key}}</button>
+                    <div class="panel">
+                        {% for each in values %}
+                        <a href="{{ each.1 }}">{{ each.0 }}</a>
+                        {% endfor %}
+                    </div>
+            {% endfor %}
+        </div>
+        <div class="grid-10" style="float: right; margin-right: 2%; margin-left:-8%">
+            <h2>Alphabetically</h2>
+            {% alpha_dict as alpha %}
+            {% for key, values in alpha.items %}
+                <button class="accordion">{{key}}</button>
+                    <div class="panel">
+                        {% for each in values %}
+                        <a href="{{ each.1 }}">{{ each.0 }}</a>
+                        {% endfor %}
+                    </div>
+            {% endfor %}
+        </div>
+        <div>
             <a href="/">
               <svg class="logo" viewBox="0 0 127.6 84.8" preserveAspectRation="xMinYMin meet">
                 <polygon points="42.7,84.8 49.6,79.4 40,62.5 51.2,43.5 51.2,43.5 25,0 0,55.6 "/>
@@ -25,8 +52,25 @@
             {% block content %}
             {% endblock %}
         </div>
+    </div>
         <div class="minerals__random">
-          <a class="minerals__anchor" href="{% url 'minerals:detail' pk=random_mineral.id %}">Show random mineral</a>
+          <a class="minerals__anchor" href="{% random_mineral %}">Show random mineral</a>
         </div>
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

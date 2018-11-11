@@ -176,7 +176,7 @@ input { margin-bottom: 1.5rem; }
 table, p, ul { margin-bottom: 2.5rem; }
 
 .text-centered { text-align: center; }
-
+.text-right    { text-align: right; }
 .logo { display: block; fill: #384033; position: relative; margin: 0 auto; width: 72px; }
 .logo__name { margin-bottom: 0; }
 .logo__text { margin-bottom: 50px; font-size: 13px; }
@@ -202,3 +202,11 @@ table, p, ul { margin-bottom: 2.5rem; }
 .mineral__table-container { padding: 5px 30px 0; }
 .mineral__category { font-weight: bold; width: 40%; }
 .mineral__formula { font-size: 12px; }
+
+
+.accordion { active:false; collapsible: true; border: solid 2px #DCF5F2; border-radius: 100px; color: #384033; display: block; font-size: 13px; text-align: center; padding: 8px 0 7px 0; width: 100%; transition: background-color 200ms ease-in-out, font-weight 200ms ease-in-out, color 200ms ease-in-out; }
+
+
+.active, .accordion:hover { background-color: #DCF5F2; color: #384033; font-weight: bold; }
+
+.panel { background-color: white; text-align: center; width: 100%; collapsible: true; active:false; display: none;}
