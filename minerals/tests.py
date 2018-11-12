@@ -62,6 +62,7 @@ class MineralViewsTests(TestCase):
         self.assertIn('<a class="minerals__anchor" href="/minerals/', response.content.decode('utf-8'))
 
 #Need to add the additional views to the test cases.
-        
+        #Search by name
+        #Test more HTML returned.
 #Need to add the tags to the test cases.
     #random mineral, mineral dict, alpha dict
