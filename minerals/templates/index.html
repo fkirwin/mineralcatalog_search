@@ -5,6 +5,11 @@
 {% block content %}
     <div class="bounds">
       <div class="grid-100">
+          {% if messages %}
+            {% for message in messages %}
+                <ul style="text-align: center;">{{ message }}</ul>
+            {% endfor %}
+          {%endif%}
         <ul class="minerals__container">
           {% for mineral in minerals %}
           <li class="minerals__item">

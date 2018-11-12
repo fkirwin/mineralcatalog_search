@@ -4,7 +4,7 @@ from django import template
 from django.urls import reverse
 
 from minerals.models import Mineral
-from minerals import views as mineral_views
+
 
 register = template.Library()
 
@@ -39,6 +39,7 @@ def menu_dict():
                                         ]
     return mineral_names_ids
 
+
 @register.simple_tag
 def alpha_dict():
     """
@@ -58,6 +59,7 @@ def alpha_dict():
                                          reverse('minerals:detail', kwargs={"pk": mineral['id']}))
                                         ]
     return mineral_names_ids
+
 
 @register.filter('concatenate')
 def concatenate(arg1, arg2):
