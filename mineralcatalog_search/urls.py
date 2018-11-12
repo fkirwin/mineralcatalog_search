@@ -18,11 +18,14 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+import debug_toolbar
 
 from minerals import views as mineral_views
 
 urlpatterns = [
     url(r'^minerals/', include(('minerals.urls', 'minerals'),  namespace='minerals')),
+    url(r'search/$', mineral_views.search_by_name, name='search'),
     url('admin/', admin.site.urls),
-    url(r'^$', mineral_views.index, name='index')
+    url(r'^$', mineral_views.index, name='index'),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

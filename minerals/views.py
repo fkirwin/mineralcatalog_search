@@ -20,3 +20,6 @@ def mineral_detail(request, pk):
     return render(request,
                   'detail.html',
                   {'mineral': selected_mineral})
+
+def search_by_name(request):
+    pass
