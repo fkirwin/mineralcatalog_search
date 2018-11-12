@@ -22,4 +22,6 @@ def mineral_detail(request, pk):
                   {'mineral': selected_mineral})
 
 def search_by_name(request):
-    pass
+    search_term = request.GET.get('q')
+    minerals = Mineral.objects.filter(name__icontains=search_term)
+    return render(request, 'index.html', {'minerals': minerals})

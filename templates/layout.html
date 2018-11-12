@@ -55,7 +55,7 @@
     </div>
         <div class="minerals__random">
             <form method="GET" action="{% url 'minerals:search' %}">
-             <input type="search" id="q" style="color: black; width: 20%; height: 5%;">
+             <input type="text" id="q" name="q" style="color: black; width: 20%; height: 5%;">
              <button class="minerals__anchor" style="width: 10%; height: 5%; color: black;">Search</button>
             </form>
             <a class="minerals__anchor" href="{% random_mineral %}">Show random mineral</a></li>
