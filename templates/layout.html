@@ -16,7 +16,7 @@
     <body>
     <div class="grid-100">
         <div class="grid-10" style="float: left; margin-left: 2%; margin-right: -8%">
-            <h2>Categorically</h2>
+            <h2>Categorical Links</h2>
             {% menu_dict as menu %}
             {% for key, values in menu.items %}
                 <button class="accordion">{{key}}</button>
@@ -28,15 +28,20 @@
             {% endfor %}
         </div>
         <div class="grid-10" style="float: right; margin-right: 2%; margin-left:-8%">
-            <h2>Alphabetically</h2>
+            <h2>Alphabetical Filter</h2>
             {% alpha_dict as alpha %}
             {% for key, values in alpha.items %}
-                <button class="accordion">{{key}}</button>
-                    <div class="panel">
-                        {% for each in values %}
-                        <a href="{{ each.1 }}">{{ each.0 }}</a>
-                        {% endfor %}
-                    </div>
+                {% url 'index' as core_index %}
+                {% url 'minerals:index' as mineral_index %}
+                {% with request.path|slice:"-1:" as target_letter %}
+                    {% if key == target_letter %}
+                        <a class="minerals__anchor" href="{% url 'minerals:alpha' letter=key %}" style="font-weight: bolder;">{{key}}</a>
+                    {% elif key == 'A' and request.path == core_index or  key == 'A' and request.path == mineral_index %}
+                        <a class="minerals__anchor" href="{% url 'minerals:alpha' letter=key %}" style="font-weight: bolder;">{{key}}</a>
+                    {% else %}
+                        <a class="minerals__anchor" href="{% url 'minerals:alpha' letter=key %}" style="font-weight: lighter;">{{key}}</a>
+                    {% endif %}
+                {% endwith %}
             {% endfor %}
         </div>
         <div>

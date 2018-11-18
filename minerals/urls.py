@@ -9,6 +9,7 @@ from . import views as mineral_views
 urlpatterns = [
     url(r'(?P<pk>\d+)/$', mineral_views.mineral_detail, name='detail'),
     url(r'search/$', mineral_views.search_by_name, name='search'),
+    url(r'alpha/(?P<letter>\w+)', mineral_views.search_by_mineral_first, name='alpha'),
     url(r'^$', mineral_views.index, name='index'),
     url(r'^__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

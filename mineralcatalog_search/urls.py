@@ -25,6 +25,7 @@ from minerals import views as mineral_views
 urlpatterns = [
     url(r'^minerals/', include(('minerals.urls', 'minerals'),  namespace='minerals')),
     url(r'search/$', mineral_views.search_by_name, name='search'),
+    url(r'alpha/(?P<letter>\w+)', mineral_views.search_by_mineral_first, name='alpha'),
     url('admin/', admin.site.urls),
     url(r'^$', mineral_views.index, name='index'),
     url(r'^__debug__/', include(debug_toolbar.urls)),

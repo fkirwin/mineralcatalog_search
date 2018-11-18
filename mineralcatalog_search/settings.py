@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
 )
 
 
-##Debug specific
+#Debug specific
 INTERNAL_IPS = ('127.0.0.1', 'localhost',)
 
 INSTALLED_APPS += (
